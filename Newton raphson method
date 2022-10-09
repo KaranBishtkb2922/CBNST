@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<math.h>
+#define f(x) (x*x - 4*x - 10)
+#define g(x) (2*x - 4)
+#define E 0.0001
+
+int main(){
+	float x1,x2,f1,f2,g1;
+	printf("Enter the initial value : ");
+	scanf("%f",&x1);
+	int count=0;
+		printf("x1\t\tf1\t\tg1\t\tx2\n");
+		do{
+		f1=f(x1);
+		g1=g(x1);
+		x2=x1-f1/g1;
+			f2=f(x2);
+		printf("%.3f\t\t%.3f\t\t%.3f\t\t%.3f\n",x1,f1,g1,x2);
+		x1=x2;
+		count++;
+	}while(f2>E);
+
+	printf("Root is %.4f : \n",x2);
+	printf("No of iteration : %d",count);
+	return 0;
+	
+}
