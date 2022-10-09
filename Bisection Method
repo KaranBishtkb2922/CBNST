@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<math.h>
+float fun(float x){
+	return (x*x*x-4*x-9);
+}
+
+void bisect(float *x,float a,float b,int *itr){
+	*x=(a+b)/2;
+	++(*itr);
+	printf("Iteration no. %3d X=%.2f\n",*itr,*x);
+}
+
+int main(){
+	printf("x*x*x-4*x-9\n");
+	int itr=0,maxitr;
+	float x,a,b,all_err,X;
+	printf("Enter x:");
+	scanf("%f",&x);
+	
+	printf("a:");
+	scanf("%f",&a);
+	printf("b:");
+	scanf("%f",&b);
+	printf("Allowed error:");
+	scanf("%f",&all_err);
+	printf("Maximum iteration:");
+	scanf("%f",&maxitr);
+	
+	bisect(&x,a,b,&itr);
+	do{
+		if(fun(a)*fun(x)<0)
+		b=x;
+		else
+		a=x;
+		bisect(&X,a,b,&itr);
+		if(fabs(X-x)<all_err){
+			printf("after %d iteration,root = %6.4f",itr,X);
+			return 0;
+		}
+		x=X;
+	}while(itr<maxitr);
+	
+	printf("The solution does not converge or iterations are not sufficient");
+	return 0;
+}
